@@ -10,6 +10,8 @@
         <li>No jobs to display</li>
     {% endfor %}
     </ul>
-    {{ quick_form(form) }}
+    {% if form %}
+        {{ quick_form(form) }}
+    {% endif %}
 </div>
 {% endblock %}

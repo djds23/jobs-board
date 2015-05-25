@@ -1,5 +1,6 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for
-from flask.ext.security import current_user
+from flask_security import current_user
+import sqlalchemy
 from ..core import db
 from .models import Company, Job
 from .forms import CompanyForm, EditJobForm, NewJobForm
@@ -17,13 +18,15 @@ def index():
 @blueprint.route('/jobs/', methods=['GET', 'POST'])
 def job_list():
     jobs = Job.query.active()
-    form = NewJobForm()
-    form.company.query = current_user.companies
-    if form.validate_on_submit():
-        job = Job(poster=current_user)
-        form.populate_obj(job)
-        db.session.commit()
-        return redirect('/')
+    form = None
+    if hasattr(current_user, 'companies'):
+        form = NewJobForm()
+        form.company.query = current_user.companies
+        if form.validate_on_submit():
+            job = Job(poster=current_user)
+            form.populate_obj(job)
+            db.session.commit()
+            return redirect('/')
     return render_template('jobs/job-list.html', form=form, jobs=jobs)
 
 @blueprint.route('/jobs/<int:job_id>/', methods=['GET', 'POST'])
