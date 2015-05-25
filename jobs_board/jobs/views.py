@@ -1,6 +1,5 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for
 from flask_security import current_user
-import sqlalchemy
 from ..core import db
 from .models import Company, Job
 from .forms import CompanyForm, EditJobForm, NewJobForm
