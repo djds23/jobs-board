@@ -4,3 +4,5 @@ SECURITY_REGISTERABLE = True
 SECURITY_CHANGEABLE = True
 SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/jobsboard'
 SECRET_KEY = 'super-secret' # NOTE: this should obviously be changed
+MAIL_DEFAULT_SENDER = 'default@for.jobsboard'
+MAIL_SUPPRESS_SEND = True

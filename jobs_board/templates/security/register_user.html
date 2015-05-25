@@ -1,10 +1,18 @@
 {% extends "security/base.html" %}
-{% from "foundation_wtf.html" import quick_form %}
 
 {% block body_content %}
     <div class="row">
         <div class="large-4 columns large-offset-4 end">
-        {{ quick_form(register_user_form, action=url_for('security.register'), buttons=[]) }}
+            <form action="{{ url_for('security.register') }}" method="POST">
+                {{ register_user_form.csrf_token }}
+                {{ render_field(register_user_form.first_name) }}
+                {{ render_field(register_user_form.last_name) }}
+                {{ render_field(register_user_form.username) }}
+                {{ render_field(register_user_form.email) }}
+                {{ render_field(register_user_form.password) }}
+                {{ render_field(register_user_form.password_confirm) }}
+                {{ render_field(register_user_form.submit) }}
+            </form>
         </div>
     </div>
 {% endblock %}
