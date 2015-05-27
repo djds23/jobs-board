@@ -3,7 +3,8 @@ from flask.ext.foundation import Foundation
 from flask.ext.mail import Mail
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask.ext.sqlalchemy import SQLAlchemy
-from jobs_board.forms import ExtendedRegisterForm
+
+from .forms import ExtendedRegisterForm
 
 db = SQLAlchemy()
 foundation = Foundation()
